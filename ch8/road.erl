@@ -1,10 +1,11 @@
 -module(road).
--export([main/0]).
+-compile(export_all).
 
-main() ->
-	File = "road.txt",
-	{ok, Bin} = file:read_file(File),
-	optimal_path(parse_map(Bin)).
+main([FileName]) ->
+	{ok, Bin} = file:read_file(FileName),
+	Map = parse_map(Bin),
+	io:format("~p~n", [optimal_path(Map)]),
+	erlang:halt(0).
 
 parse_map(Bin) when is_binary(Bin) ->
 	parse_map(binary_to_list(Bin));
