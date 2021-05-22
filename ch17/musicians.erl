@@ -28,11 +28,11 @@ pick_name() ->
 	%% process that started with init/1.
 	lists:nth(rand:uniform(10), firstnames())
 	++ " " ++
-	lists:nth(rand:uniform(19), lastnames()).
+	lists:nth(rand:uniform(10), lastnames()).
 
 firstnames() ->
 	["Valerie", "Arnold", "Carlos", "Dorothy", "Keesha",
-	 "Phoebe", "Ralphie", "Tim", "WAnda", "Janet"].
+	 "Phoebe", "Ralphie", "Tim", "Wanda", "Janet"].
 
 lastnames() ->
 	["Frizzle", "Perlstein", "Ramon", "Ann", "Franklin",
