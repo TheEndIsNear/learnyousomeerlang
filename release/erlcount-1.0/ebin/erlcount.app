@@ -1,6 +1,6 @@
 {application, erlcount,
  [{vsn, "1.0.0"},
-  {modules, [erlcount, erlcount_sup, erlcount_lin,
+  {modules, [erlcount, erlcount_sup, erlcount_lib,
              erlcount_dispatch, erlcount_counter]},
   {applications, [ppool]},
   {registered, [erlcount]},
