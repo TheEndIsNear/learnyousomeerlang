@@ -10,7 +10,7 @@ init([]) ->
     MaxTime = 100,
     {ok, {{one_for_one, MaxRestart, MaxTime},
           [{dispatch,
-            {erclount_dispatch, start_link, []},
+            {erlcount_dispatch, start_link, []},
             transient,
             60000,
             worker,

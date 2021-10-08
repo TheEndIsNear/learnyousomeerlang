@@ -8,10 +8,10 @@
 
 %%% PUBLIC_API
 start_link() ->
-    gen_statem:start_link(?MODULE, [], []).
+    gen_fsm:start_link(?MODULE, [], []).
 
 complete(Pid, Regex, Ref, Count) ->
-    gen_statem:send_all_state_event(Pid, {complete, Regex, Ref, Count}).
+    gen_fsm:send_all_state_event(Pid, {complete, Regex, Ref, Count}).
 
 init([]) ->
     {ok, Re} = application:get_env(regex),
@@ -33,7 +33,7 @@ dispatching({continue, File, Continuation}, Data = #data{regex=Re, refs=Refs}) -
         [Ref|NewRefs]
     end,
     NewRefs = lists:foldl(F, Refs, Re),
-    gen_statem:send_event(self(), Continuation()),
+    gen_fsm:send_event(self(), Continuation()),
     {next_state, dispatching, Data#data{refs = NewRefs}};
 
 dispatching(done, Data) ->
@@ -49,7 +49,7 @@ listening(done, Data) -> % entries still missing
     {next_state, listening, Data}.
 
 handle_info({start, Dir}, State, Data) ->
-    gen_statem:send_event(self(), erlcount_lib:find_erl(Dir)),
+    gen_fsm:send_event(self(), erlcount_lib:find_erl(Dir)),
     {next_state, State, Data}.
 
 handle_event({complete, Regex, Ref, Count}, State, Data = #data{regex=Re, refs=Refs}) ->
