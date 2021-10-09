@@ -101,7 +101,7 @@ handle_down_worker(Ref, S = #state{limit=L, sup=Sup, refs=Refs}) ->
         {{value, Args}, Q} ->
             {ok, Pid} = supervisor:start_child(Sup, Args),
             NewRef = erlang:monitor(process, Pid),
-            NewRefs = gb:sets_insert(NewRef, gb_sets:delete(Ref, Refs)),
+            NewRefs = gb_sets:insert(NewRef, gb_sets:delete(Ref, Refs)),
             {noreply, S#state{refs=NewRefs, queue=Q}};
         {empty, _} ->
             {noreply, S#state{limit=L+1, refs=gb_sets:delete(Ref, Refs)}}
