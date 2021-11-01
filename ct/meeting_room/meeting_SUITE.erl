@@ -1,6 +1,7 @@
 -module(meeting_SUITE).
 -include_lib("common_test/include/ct.hrl").
--export([init_per_group/2, end_per_group/2]).
+-export([all/0, groups/0, init_per_group/2, end_per_group/2]).
+-export([carla/1, mark/1, dog/1, all_same_owner/1]).
 
 all() -> [{group, session}].
 
@@ -35,7 +36,7 @@ mark(_Config) ->
 dog(_Config) ->
     meeting:rent_projector(animals),
     timer:sleep(10),
-    meeting:user_chairs(animals),
+    meeting:use_chairs(animals),
     timer:sleep(10),
     meeting:book_room(animals).
 
