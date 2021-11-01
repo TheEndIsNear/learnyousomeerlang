@@ -3,5 +3,4 @@
 *.tar.gz
 */rel/*
 *.html
-ct_*
-ct/*
+logs/
